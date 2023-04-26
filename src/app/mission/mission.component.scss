@@ -1,0 +1,69 @@
+/* mission.component.scss */
+
+// .mat-dialog-container {
+//     position: relative; /* set container to relative position */
+//   }
+//   .close-button {
+//     position: absolute;
+//     top: -10px; /* position button above container */
+//     right: -10px; /* position button outside container */
+//     z-index: 1; /* ensure button is above container */
+//   }
+:host {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .mat-dialog-actions {
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  button.mat-button {
+    margin-left: 10px;
+  }
+  
+  button.approve {
+    color: white;
+    background-color: #4CAF50;
+  }
+  
+  button.disapprove {
+    color: white;
+    background-color: #f44336;
+  }
+  
+  @media (max-width: 767px) {
+    .mat-dialog-container {
+      margin: 0;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: none !important;
+    }
+    
+    h2 {
+      font-size: 20px;
+    }
+    
+    p {
+      font-size: 16px;
+    }
+    
+    button.mat-button {
+      font-size: 16px;
+    }
+  }
+  

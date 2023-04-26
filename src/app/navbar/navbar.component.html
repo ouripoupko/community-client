@@ -1,0 +1,24 @@
+  <mat-toolbar class="navbar" color="primary">
+  <div *ngIf="!isMobile" class="navbar-desktop">
+    <div class="navbar-title">My App</div>
+    <div class="navbar-links">
+      <a routerLink="/tasks" routerLinkActive="active-link">Tasks</a>
+      <a routerLink="/friends" routerLinkActive="active-link">Friends</a>
+      <a routerLink="/candidates" routerLinkActive="active-link">Candidates</a>
+    </div>
+  </div>
+
+  <div *ngIf="isMobile" class="navbar-mobile">
+    <div class="navbar-top-row">
+      <div class="navbar-title">My App</div>
+      <button mat-icon-button (click)="toggleMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div class="navbar-links" [ngClass]="{'expanded': isMenuExpanded}" (click)="toggleMenu()">
+      <a routerLink="/tasks" routerLinkActive="active-link">Tasks</a>
+      <a routerLink="/friends" routerLinkActive="active-link">Friends</a>
+      <a routerLink="/candidates" routerLinkActive="active-link">Candidates</a>
+    </div>
+  </div>
+</mat-toolbar>

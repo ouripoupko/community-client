@@ -1,0 +1,15 @@
+<mat-dialog-content>
+    <h2 mat-dialog-title>{{ mission.title }}</h2>
+    <div mat-dialog-content>
+    <p>ID: {{ mission.id }}</p>
+    <p>Name: {{ mission.name }}</p>
+    <!-- Add any other mission data you want to display -->
+    </div>
+    <div mat-dialog-actions>
+    <button mat-button color="primary" (click)="closeDialog(true)">Approve</button>
+    <button mat-button color="warn" (click)="closeDialog(false)">Disapprove</button>
+    </div>
+</mat-dialog-content>
+<button mat-icon-button (click)="closeDialog(false)" class="close-button">
+    <mat-icon>close</mat-icon>
+</button>

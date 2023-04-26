@@ -1,0 +1,53 @@
+/* missions.component.scss */
+
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  mat-card {
+    width: 350px;
+    margin: 20px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+  }
+  
+  mat-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  mat-card-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mission-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 10px;
+  }
+  
+  mat-card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  mat-card-subtitle {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #666;
+  }
+  
+  mat-card-content {
+    padding-top: 10px;
+  }
+  
+  mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+  
