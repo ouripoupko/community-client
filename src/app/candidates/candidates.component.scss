@@ -1,0 +1,36 @@
+.page-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 2rem;
+    text-align: center;
+  }
+  
+  .friends-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    max-width: 1280px;
+    margin: auto;
+  }
+  
+  .friend-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .friend-icon {
+    width: 50px; /* Update this value to adjust the size of the image */
+    height: 50px; /* Update this value to adjust the size of the image */
+    margin-right: 1rem;
+    border-radius: 50%;
+  }
+  
+  .friend-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
