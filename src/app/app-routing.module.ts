@@ -5,10 +5,15 @@ import { FriendsComponent } from './friends/friends.component';
 import { CandidatesComponent } from './candidates/candidates.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/tasks', pathMatch: 'full' },
-  { path: 'tasks', component: MissionsComponent },
-  { path: 'friends', component: FriendsComponent },
-  { path: 'candidates', component: CandidatesComponent },
+  {
+    path: ':server/:agent/:contract/tasks', component: MissionsComponent
+  },
+  {
+    path: ':server/:agent/:contract/friends', component: FriendsComponent 
+  },
+  {
+    path: ':server/:agent/:contract/candidates', component: CandidatesComponent
+  }
 ];
 
 @NgModule({
