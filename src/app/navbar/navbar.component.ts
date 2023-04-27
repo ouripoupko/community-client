@@ -7,7 +7,7 @@ import { RouteParamsService } from '../shared/route-params.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   isMobile = false;
   isMenuExpanded = false;
   showLinks = false;
@@ -18,10 +18,6 @@ export class NavbarComponent implements OnInit {
       .subscribe((state) => {
         this.isMobile = state.matches;
       });
-  }
-
-
-  ngOnInit(): void {
   }
 
   toggleMenu(): void {

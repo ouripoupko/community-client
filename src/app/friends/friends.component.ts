@@ -1,18 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Person } from '../shared/IPerson.interface';
-import { RouteParamsService } from '../shared/route-params.service';
 
 @Component({
   selector: 'app-friends',
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.scss']
 })
-export class FriendsComponent implements OnInit {
-  constructor(private routeParamsService: RouteParamsService) {}
-
-  ngOnInit(): void {
-    this.routeParamsService.initialize();
-  }
+export class FriendsComponent {
   friends: Person[] = [
     {
       name: 'Alice',

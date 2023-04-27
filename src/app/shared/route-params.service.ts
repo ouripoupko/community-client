@@ -9,11 +9,4 @@ export class RouteParamsService {
 
   constructor(private route: ActivatedRoute) {}
 
-  initialize(): void {
-    this.route.params.subscribe((params) => {
-      this.server = params['server'];
-      this.agent = params['agent'];
-      this.contract = params['contract'];
-    });
-  }
 }

@@ -3,16 +3,26 @@ import { RouterModule, Routes } from '@angular/router';
 import { MissionsComponent } from './missions/missions.component';
 import { FriendsComponent } from './friends/friends.component';
 import { CandidatesComponent } from './candidates/candidates.component';
+import { ContentComponent } from './content/content.component';
 
 const routes: Routes = [
   {
-    path: ':server/:agent/:contract/tasks', component: MissionsComponent
-  },
-  {
-    path: ':server/:agent/:contract/friends', component: FriendsComponent 
-  },
-  {
-    path: ':server/:agent/:contract/candidates', component: CandidatesComponent
+    path: ':server/:agent/:contract',
+    component: ContentComponent,
+    children: [
+      {
+        path: '', pathMatch: 'full', redirectTo: 'tasks'
+      },
+      {
+        path: 'tasks', component: MissionsComponent
+      },
+      {
+        path: 'friends', component: FriendsComponent 
+      },
+      {
+        path: 'candidates', component: CandidatesComponent
+      }
+    ]
   }
 ];
 

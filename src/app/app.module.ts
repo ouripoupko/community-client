@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ContentComponent } from './content/content.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MissionsComponent,
     FriendsComponent,
     CandidatesComponent,
-    MissionComponent
+    MissionComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
