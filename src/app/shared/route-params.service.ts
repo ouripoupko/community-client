@@ -7,6 +7,9 @@ export class RouteParamsService {
   agent = '';
   contract = '';
 
+  members: string[] = [];
+  candidates: string[] = [];
+
   constructor(private route: ActivatedRoute) {}
 
 }

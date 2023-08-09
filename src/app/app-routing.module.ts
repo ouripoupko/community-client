@@ -7,7 +7,8 @@ import { ContentComponent } from './content/content.component';
 
 const routes: Routes = [
   {
-    path: ':server/:agent/:contract',
+    // path: ':server/:agent/:contract',
+    path: '',
     component: ContentComponent,
     children: [
       {
