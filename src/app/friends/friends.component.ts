@@ -9,24 +9,11 @@ import { RouteParamsService } from '../shared/route-params.service';
 })
 export class FriendsComponent implements OnInit {
 
-  friends: Person[] = [
-    {
-      name: 'Alice',
-      imageUrl: 'https://via.placeholder.com/300x300.png?text=Alice',
-    },
-    {
-      name: 'Bob',
-      imageUrl: 'https://via.placeholder.com/300x300.png?text=Bob',
-    },
-    {
-      name: 'Charlie',
-      imageUrl: 'https://via.placeholder.com/300x300.png?text=Charlie',
-    },
-  ];
-
-  constructor(private routeParamsService: RouteParamsService ){}
+  constructor(public routeParamsService: RouteParamsService ){}
   
   ngOnInit(): void {
-    this.friends = this.routeParamsService.members.map(m => ({name: m, imageUrl: ''}))
+    this.routeParamsService.data.subscribe(val => {
+      this.routeParamsService.membersHtml = Object.keys(this.routeParamsService.members).map(m => { return { name: m, imageUrl: `https://via.placeholder.com/300x300.png?text=${m}` } });
+    });
   }
 }

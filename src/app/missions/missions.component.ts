@@ -12,17 +12,30 @@ import { RouteParamsService } from '../shared/route-params.service';
   styleUrls: ['./missions.component.scss']
 })
 export class MissionsComponent implements OnInit {
-  missions = [
-    { id: 1, title: 'null', name: '' }
-  ];
 
   constructor(private router: Router, private dialog: MatDialog, public routeParamsService: RouteParamsService) {}
 
   ngOnInit(): void {
-    if (!this.routeParamsService.members && !this.routeParamsService.candidates) {
-      this.missions = [
-        { id: 1, title: 'Request to join', name: '' }
+    this.routeParamsService.data.subscribe(val => {
+      this.getMissions();
+    });
+  }
+
+  getMissions() {
+    console.log('candidates: ', this.routeParamsService.candidates);
+    console.log('agent: ', this.routeParamsService.agent);
+    console.log('test: ', ![].length)
+    if (!(this.routeParamsService.agent in this.routeParamsService.members) && !this.routeParamsService.candidates.includes(this.routeParamsService.agent)) {
+      this.routeParamsService.missionsHtml = [
+        { title: 'Request to join', status: false }
       ];
+      console.log('default');
+    }
+    else {
+      this.routeParamsService.missionsHtml = Object.entries(this.routeParamsService.missions).map( ([key, val]) => {
+        return {title: key, status: val};
+      });
+      console.log(this.routeParamsService.missionsHtml)
     }
   }
 

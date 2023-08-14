@@ -1,16 +1,17 @@
 <!-- missions.component.html -->
 
-<mat-card *ngFor="let mission of missions">
+<mat-card *ngFor="let mission of routeParamsService.missionsHtml">
   <mat-card-header>
     <div mat-card-avatar class="mission-avatar"></div>
     <mat-card-title>{{ mission.title }}</mat-card-title>
-    <mat-card-subtitle>{{ mission.name }}</mat-card-subtitle>
+    <!-- <mat-card-subtitle>{{ mission.name }}</mat-card-subtitle> -->
   </mat-card-header>
   <mat-card-content>
-    <p>ID: {{ mission.id }}</p>
+    <p>status: {{ mission.status }}</p>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" (click)="openMissionDialog(mission)">View Task</button>
   </mat-card-actions>
 </mat-card>
+<h1 *ngIf="!routeParamsService.missionsHtml.length">no soup for you</h1>
   
