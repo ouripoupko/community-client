@@ -3,14 +3,15 @@
 <mat-card *ngFor="let mission of routeParamsService.missionsHtml">
   <mat-card-header>
     <div mat-card-avatar class="mission-avatar"></div>
-    <mat-card-title>{{ mission.title }}</mat-card-title>
+    <mat-card-title>{{ mission.title | middleEllipsis }}</mat-card-title>
     <!-- <mat-card-subtitle>{{ mission.name }}</mat-card-subtitle> -->
   </mat-card-header>
   <mat-card-content>
     <p>status: {{ mission.status }}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="openMissionDialog(mission)">View Task</button>
+    <button *ngIf="mission.title != 'Request to join' && !mission.status" mat-raised-button color="primary" (click)="openMissionDialog(mission)">View Task</button>
+    <button *ngIf="mission.title == 'Request to join'" mat-raised-button color="primary" (click)="JoinCommunity()">Join Community</button>
   </mat-card-actions>
 </mat-card>
 <h1 *ngIf="!routeParamsService.missionsHtml.length">no soup for you</h1>

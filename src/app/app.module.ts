@@ -17,6 +17,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ContentComponent } from './content/content.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MiddleEllipsisPipe } from './shared/middle-ellipsis.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     FriendsComponent,
     CandidatesComponent,
     MissionComponent,
-    ContentComponent
+    ContentComponent,
+    MiddleEllipsisPipe
   ],
   imports: [
     BrowserModule,

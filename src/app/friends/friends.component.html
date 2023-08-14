@@ -3,7 +3,7 @@
 <div class="friends-container">
   <div class="friend-card" *ngFor="let friend of routeParamsService.membersHtml">
     <img class="friend-icon" [src]="friend.imageUrl || 'https://via.placeholder.com/300x300.png?text=NaI'" alt="{{ friend.name }}" />
-    <h3 class="friend-name">{{ friend.name }}</h3>
+    <h3 class="friend-name">{{ friend.name | middleEllipsis }}</h3>
   </div>
   <h1 *ngIf="!routeParamsService.membersHtml.length">no soup for you</h1>
 </div>

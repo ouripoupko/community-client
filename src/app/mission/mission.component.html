@@ -1,5 +1,5 @@
 <mat-dialog-content>
-    <h2 mat-dialog-title>{{ mission.title }}</h2>
+    <h2 mat-dialog-title>{{ mission.title | middleEllipsis }}</h2>
     <div mat-dialog-content>
     <p>Status: {{ mission.status }}</p>
     <!-- <p>PKey: {{ mission.title }}</p> -->

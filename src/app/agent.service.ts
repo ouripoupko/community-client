@@ -44,4 +44,23 @@ export class AgentService {
     );
   }
 
+  getContracts(server: string, identity: string): Observable<Contract[]> {
+    let params = new HttpParams().set('action', 'get_contracts');
+    return this.http.get<Contract[]>(`${server}ibc/app/${identity}`, {params: params}).pipe(
+        tap(_ => console.log('fetched contracts')),
+        catchError(this.handleError<Contract[]>('getContracts', [])),
+        first()
+      );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      //  send the error to remote logging infrastructure
+      console.log(error); // log to console instead
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
 }

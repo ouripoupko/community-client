@@ -3,6 +3,7 @@ import { RouteParamsService } from '../shared/route-params.service';
 import { ActivatedRoute } from '@angular/router';
 import { AgentService } from '../agent.service';
 import { forkJoin, tap } from 'rxjs';
+import { Contract } from '../contract';
 
 @Component({
   selector: 'app-content',
@@ -22,6 +23,7 @@ export class ContentComponent implements OnInit {
       this.routeParamsService.agent = params['agent'];
       this.routeParamsService.contract = params['contract'];
 
+      this.getContractName();
       this.loadData();
       
       this.agentService.listen(this.routeParamsService.server, this.routeParamsService.agent, this.routeParamsService.contract)
@@ -33,9 +35,29 @@ export class ContentComponent implements OnInit {
     });
   }
 
+  getContractName() {
+    this.agentService.getContracts(this.routeParamsService.server, this.routeParamsService.agent).subscribe((val: Contract[]) => {
+      this.routeParamsService.contractName = val.find(x => x.id == this.routeParamsService.contract)?.name || 'My Community';
+    });
+  }
+
   loadData() {
     forkJoin([this.getMembers(), this.getTasks(), this.getCandidates()]).subscribe(val => {
-      this.routeParamsService.data.next(null);
+      this.routeParamsService.data.next(true);
+      this.routeParamsService.membersHtml = Object.keys(this.routeParamsService.members).map(m => { return { name: m, imageUrl: `https://via.placeholder.com/300x300.png?text=${m}` } });
+      this.routeParamsService.candidatesHtml = this.routeParamsService.candidates.map(c => { return { name: c, imageUrl: `https://via.placeholder.com/300x300.png?text=${c}` } });
+      if (!(this.routeParamsService.agent in this.routeParamsService.members) && !this.routeParamsService.candidates.includes(this.routeParamsService.agent)) {
+        this.routeParamsService.missionsHtml = [
+          { title: 'Request to join', status: false }
+        ];
+        console.log('default');
+      }
+      else {
+        this.routeParamsService.missionsHtml = Object.entries(this.routeParamsService.missions).map( ([key, val]) => {
+          return {title: key, status: val};
+        });
+        console.log(this.routeParamsService.missionsHtml)
+      }
     })
   }
 

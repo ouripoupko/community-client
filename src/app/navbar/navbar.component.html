@@ -1,6 +1,6 @@
   <mat-toolbar class="navbar" color="primary">
   <div *ngIf="!isMobile" class="navbar-desktop">
-    <div class="navbar-title">My App</div>
+    <div class="navbar-title">{{routeParamsService.contractName}}</div>
     <div class="navbar-links">
       <a routerLink="/tasks" [queryParams]="{server: routeParamsService.server, agent: routeParamsService.agent, contract: routeParamsService.contract}" routerLinkActive="active-link">Tasks</a>
       <a routerLink="/friends" [queryParams]="{server: routeParamsService.server, agent: routeParamsService.agent, contract: routeParamsService.contract}" routerLinkActive="active-link">Friends</a>
@@ -10,7 +10,7 @@
 
   <div *ngIf="isMobile" class="navbar-mobile">
     <div class="navbar-top-row">
-      <div class="navbar-title">My App</div>
+      <div class="navbar-title">{{routeParamsService.contractName}}</div>
       <button mat-icon-button (click)="toggleMenu()">
         <mat-icon>menu</mat-icon>
       </button>

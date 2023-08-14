@@ -9,6 +9,7 @@ export class RouteParamsService {
   server = '';
   agent = '';
   contract = '';
+  contractName = '';
 
   members: {[key: string]: any} = {};
   candidates: string[] = [];

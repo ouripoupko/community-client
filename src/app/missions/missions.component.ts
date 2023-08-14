@@ -5,6 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MissionComponent } from '../mission/mission.component';
 import { RouteParamsService } from '../shared/route-params.service';
+import { MiddleEllipsisPipe } from '../shared/middle-ellipsis.pipe';
+import { AgentService } from '../agent.service';
+import { Method } from '../contract';
 
 @Component({
   selector: 'app-missions',
@@ -13,12 +16,15 @@ import { RouteParamsService } from '../shared/route-params.service';
 })
 export class MissionsComponent implements OnInit {
 
-  constructor(private router: Router, private dialog: MatDialog, public routeParamsService: RouteParamsService) {}
+  constructor(private router: Router,
+    private dialog: MatDialog,
+    public routeParamsService: RouteParamsService,
+    private agentService: AgentService) { }
 
   ngOnInit(): void {
-    this.routeParamsService.data.subscribe(val => {
-      this.getMissions();
-    });
+    // this.routeParamsService.data.subscribe(val => {
+    //   this.getMissions();
+    // });
   }
 
   getMissions() {
@@ -32,8 +38,8 @@ export class MissionsComponent implements OnInit {
       console.log('default');
     }
     else {
-      this.routeParamsService.missionsHtml = Object.entries(this.routeParamsService.missions).map( ([key, val]) => {
-        return {title: key, status: val};
+      this.routeParamsService.missionsHtml = Object.entries(this.routeParamsService.missions).map(([key, val]) => {
+        return { title: key, status: val };
       });
       console.log(this.routeParamsService.missionsHtml)
     }
@@ -50,5 +56,12 @@ export class MissionsComponent implements OnInit {
       data: mission
     });
   }
-  
+
+  JoinCommunity() {
+    this.agentService.write(this.routeParamsService.server, 
+      this.routeParamsService.agent, 
+      this.routeParamsService.contract, { name: 'request_join',
+      values: {}} as Method).subscribe();
+  }
+
 }
