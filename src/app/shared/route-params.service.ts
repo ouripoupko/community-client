@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/internal/Subject';
 import { Person } from './IPerson.interface';
 import { Mission } from './IMission.interface';
+import { Partner } from './partner';
 
 @Injectable({ providedIn: 'root' })
 export class RouteParamsService {
@@ -14,6 +15,7 @@ export class RouteParamsService {
   members: {[key: string]: any} = {};
   candidates: string[] = [];
   missions: {[key: string]: boolean} = {};
+  partners: Partner[] = [];
 
   membersHtml: Person[] = [];
   candidatesHtml: Person[] = [];
