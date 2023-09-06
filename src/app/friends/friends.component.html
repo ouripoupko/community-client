@@ -1,9 +1,9 @@
 <h1 class="page-title">My Friends List</h1>
 
 <div class="friends-container">
-  <div class="friend-card" *ngFor="let friend of routeParamsService.membersHtml">
-    <img class="friend-icon" [src]="friend.imageUrl || 'https://via.placeholder.com/300x300.png?text=NaI'" alt="{{ friend.name }}" />
-    <h3 class="friend-name">{{ friend.name | middleEllipsis }}</h3>
+  <div class="friend-card" *ngFor="let friend of routeParamsService.members">
+    <img class="friend-icon" [src]="routeParamsService.PartnersProfile[friend].imageUrl || 'https://via.placeholder.com/300x300.png?text=NaI'" alt="{{ routeParamsService.PartnersProfile[friend].name }}" />
+    <h3 class="friend-name">{{ routeParamsService.PartnersProfile[friend].name | middleEllipsis }}</h3>
   </div>
-  <h1 *ngIf="!routeParamsService.membersHtml.length">no soup for you</h1>
+  <h1 *ngIf="!routeParamsService.members.length">no soup for you</h1>
 </div>

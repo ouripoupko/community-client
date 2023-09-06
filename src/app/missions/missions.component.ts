@@ -8,48 +8,22 @@ import { RouteParamsService } from '../shared/route-params.service';
 import { MiddleEllipsisPipe } from '../shared/middle-ellipsis.pipe';
 import { AgentService } from '../agent.service';
 import { Method } from '../contract';
+import { Mission } from '../shared/IMission.interface';
 
 @Component({
   selector: 'app-missions',
   templateUrl: './missions.component.html',
   styleUrls: ['./missions.component.scss']
 })
-export class MissionsComponent implements OnInit {
+export class MissionsComponent {
 
   constructor(private router: Router,
     private dialog: MatDialog,
     public routeParamsService: RouteParamsService,
     private agentService: AgentService) { }
 
-  ngOnInit(): void {
-    // this.routeParamsService.data.subscribe(val => {
-    //   this.getMissions();
-    // });
-  }
-
-  getMissions() {
-    console.log('candidates: ', this.routeParamsService.candidates);
-    console.log('agent: ', this.routeParamsService.agent);
-    console.log('test: ', ![].length)
-    if (!(this.routeParamsService.agent in this.routeParamsService.members) && !this.routeParamsService.candidates.includes(this.routeParamsService.agent)) {
-      this.routeParamsService.missionsHtml = [
-        { title: 'Request to join', status: false }
-      ];
-      console.log('default');
-    }
-    else {
-      this.routeParamsService.missionsHtml = Object.entries(this.routeParamsService.missions).map(([key, val]) => {
-        return { title: key, status: val };
-      });
-      console.log(this.routeParamsService.missionsHtml)
-    }
-  }
-
-  goToMission(id: number): void {
-    this.router.navigate(['/mission', id]);
-  }
-
-  openMissionDialog(mission: any): void {
+  openMissionDialog(key: string): void {
+    let mission = {title: key, status: this.routeParamsService.missions[key]} as Mission;
     const dialogRef = this.dialog.open(MissionComponent, {
       width: '90%',
       maxWidth: '600px',

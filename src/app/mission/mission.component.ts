@@ -17,7 +17,7 @@ export class MissionComponent implements OnInit {
     public dialogRef: MatDialogRef<MissionComponent>,
     @Inject(MAT_DIALOG_DATA) public mission: Mission,
     private agentService: AgentService,
-    private routeParamsService: RouteParamsService
+    public routeParamsService: RouteParamsService
   ) { }
 
   ngOnInit(): void {

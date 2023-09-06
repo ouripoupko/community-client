@@ -1,18 +1,36 @@
 <!-- missions.component.html -->
 
-<mat-card *ngFor="let mission of routeParamsService.missionsHtml">
-  <mat-card-header>
-    <div mat-card-avatar class="mission-avatar"></div>
-    <mat-card-title>{{ mission.title | middleEllipsis }}</mat-card-title>
-    <!-- <mat-card-subtitle>{{ mission.name }}</mat-card-subtitle> -->
-  </mat-card-header>
-  <mat-card-content>
-    <p>status: {{ mission.status }}</p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button *ngIf="mission.title != 'Request to join' && !mission.status" mat-raised-button color="primary" (click)="openMissionDialog(mission)">View Task</button>
-    <button *ngIf="mission.title == 'Request to join'" mat-raised-button color="primary" (click)="JoinCommunity()">Join Community</button>
-  </mat-card-actions>
+<mat-card *ngFor="let key of routeParamsService.missionsHtml">
+  <ng-container *ngIf="key == routeParamsService.agent; else otherMember">
+    <mat-card-header>
+      <!-- <div mat-card-avatar class="mission-avatar"></div> -->
+      <mat-card-title>
+        <img class="mission-avatar" [src]="routeParamsService.PartnersProfile[key].imageUrl || 'https://via.placeholder.com/300x300.png?text=NaI'" alt="{{ routeParamsService.PartnersProfile[key].name }}" />
+        Request to join
+      </mat-card-title>
+      <!-- <mat-card-subtitle>{{ mission.name }}</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="JoinCommunity()">Join Community</button>
+    </mat-card-actions>
+  </ng-container>
+
+  <ng-template #otherMember>
+    <mat-card-header>
+      <!-- <div mat-card-avatar class="mission-avatar"></div> -->
+      <mat-card-title>
+        <img class="mission-avatar" [src]="routeParamsService.PartnersProfile[key].imageUrl || 'https://via.placeholder.com/300x300.png?text=NaI'" alt="{{ routeParamsService.PartnersProfile[key].name }}" />
+        {{ routeParamsService.PartnersProfile[key].name | middleEllipsis }}
+      </mat-card-title>
+      <!-- <mat-card-subtitle>{{ mission.name }}</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-card-content>
+      <p>status: {{ routeParamsService.missions[key] }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button *ngIf="!routeParamsService.missions[key]" mat-raised-button color="primary" (click)="openMissionDialog(key)">View Task</button>
+    </mat-card-actions>
+  </ng-template>
 </mat-card>
 <h1 *ngIf="!routeParamsService.missionsHtml.length">no soup for you</h1>
   

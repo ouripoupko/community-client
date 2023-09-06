@@ -12,14 +12,15 @@ export class RouteParamsService {
   contract = '';
   contractName = '';
 
-  members: {[key: string]: any} = {};
+  members: string[] = [];
   candidates: string[] = [];
   missions: {[key: string]: boolean} = {};
   partners: Partner[] = [];
 
   membersHtml: Person[] = [];
   candidatesHtml: Person[] = [];
-  missionsHtml: Mission[] = [];
+  PartnersProfile: {[key: string]: Person} = {};
+  missionsHtml: string[] = [];
 
   data: Subject<any> = new Subject();
 

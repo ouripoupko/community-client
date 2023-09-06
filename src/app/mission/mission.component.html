@@ -1,7 +1,8 @@
 <mat-dialog-content>
-    <h2 mat-dialog-title>{{ mission.title | middleEllipsis }}</h2>
+    <h2 mat-dialog-title>{{ routeParamsService.PartnersProfile[mission.title].name | middleEllipsis }}</h2>
     <div mat-dialog-content>
-    <p>Status: {{ mission.status }}</p>
+        <img width="300" height="300" class="mission-avatar" [src]="routeParamsService.PartnersProfile[mission.title].imageUrl || 'https://via.placeholder.com/300x300.png?text=NaI'" alt="{{ routeParamsService.PartnersProfile[mission.title].name }}" />
+        <p>Status: {{ mission.status }}</p>
     <!-- <p>PKey: {{ mission.title }}</p> -->
     <!-- Add any other mission data you want to display -->
     </div>
