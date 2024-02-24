@@ -23,12 +23,18 @@ export class MissionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  closeDialog(value: boolean): void {
+  closeDialog(value?: boolean): void {
     if (value) {
       this.agentService.write(this.routeParamsService.server, 
         this.routeParamsService.agent, 
         this.routeParamsService.contract, { name: 'approve',
         values: {"approved": this.mission.title}} as Method).subscribe();
+    }
+    else if (value == false) {
+      this.agentService.write(this.routeParamsService.server, 
+        this.routeParamsService.agent, 
+        this.routeParamsService.contract, { name: 'disapprove',
+        values: {"disapproved": this.mission.title}} as Method).subscribe();
     }
     this.dialogRef.close(value);
     console.log("close")

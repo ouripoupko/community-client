@@ -1,9 +1,10 @@
 <h1 class="page-title">All Candidates List</h1>
 
 <div class="friends-container">
-  <div class="friend-card" *ngFor="let friend of routeParamsService.candidates">
-    <img class="friend-icon" [src]="routeParamsService.PartnersProfile[friend].imageUrl" alt="{{ routeParamsService.PartnersProfile[friend].name }}" />
-    <h3 class="friend-name">{{ routeParamsService.PartnersProfile[friend].name | middleEllipsis }}</h3>
+  <div class="friend-card" *ngFor="let candidate of routeParamsService.candidates">
+    <img class="friend-icon" [src]="routeParamsService.PartnersProfile[candidate].imageUrl" alt="{{ routeParamsService.PartnersProfile[candidate].name }}" />
+    <h3 class="friend-name">{{ routeParamsService.PartnersProfile[candidate].name | middleEllipsis }}</h3>
+    <button *ngIf="candidate == routeParamsService.agent" mat-button color="warn" (click)="cancel()">Cancel</button>
   </div>
   <h1 *ngIf="!routeParamsService.candidates.length">no soup for you</h1>
 </div>

@@ -5,10 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MissionComponent } from '../mission/mission.component';
 import { RouteParamsService } from '../shared/route-params.service';
-import { MiddleEllipsisPipe } from '../shared/middle-ellipsis.pipe';
 import { AgentService } from '../agent.service';
 import { Method } from '../contract';
 import { Mission } from '../shared/IMission.interface';
+import { InstructionsComponent } from '../instructions/instructions.component';
 
 @Component({
   selector: 'app-missions',
@@ -32,10 +32,23 @@ export class MissionsComponent {
   }
 
   JoinCommunity() {
-    this.agentService.write(this.routeParamsService.server, 
-      this.routeParamsService.agent, 
-      this.routeParamsService.contract, { name: 'request_join',
-      values: {}} as Method).subscribe();
+    if (this.routeParamsService.members.length == 0) {
+      this.openInstractions()
+    }
+    else {
+      this.agentService.write(this.routeParamsService.server, 
+        this.routeParamsService.agent, 
+        this.routeParamsService.contract, { name: 'request_join',
+        values: {}} as Method).subscribe();
+    }
+  }
+
+  openInstractions() {
+    const dialogRef = this.dialog.open(InstructionsComponent, {
+      width: '90%',
+      maxWidth: '600px',
+      //data: mission
+    });
   }
 
 }

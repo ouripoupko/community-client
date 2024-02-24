@@ -27,10 +27,12 @@
     height: 50px; /* Update this value to adjust the size of the image */
     margin-right: 1rem;
     border-radius: 50%;
+    object-fit: cover;
   }
   
   .friend-name {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0;
+    margin-right: 1rem;
   }

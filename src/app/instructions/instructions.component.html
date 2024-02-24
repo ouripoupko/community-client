@@ -1,0 +1,17 @@
+<mat-dialog-content>
+    <h2 mat-dialog-title>Type Approval Instractions</h2>
+    <div mat-dialog-content>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Instrutions</mat-label>
+                <input matInput type="text" [(ngModel)]="instrutions">
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+    <button mat-button color="primary" [disabled]="!instrutions" (click)="closeDialog(true)">Set New Community Instructions</button>
+    </div>
+</mat-dialog-content>
+<button mat-icon-button (click)="closeDialog(false)" class="close-button">
+    <mat-icon>close</mat-icon>
+</button>

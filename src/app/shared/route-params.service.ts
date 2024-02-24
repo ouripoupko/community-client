@@ -16,6 +16,7 @@ export class RouteParamsService {
   candidates: string[] = [];
   missions: {[key: string]: boolean} = {};
   partners: Partner[] = [];
+  instructions = '';
 
   membersHtml: Person[] = [];
   candidatesHtml: Person[] = [];

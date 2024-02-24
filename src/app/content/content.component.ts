@@ -38,7 +38,7 @@ export class ContentComponent implements OnInit {
 
   loadData() {
     this.getPartners().subscribe(_ => {
-      forkJoin([this.getMembers(), this.getTasks(), this.getCandidates()]).subscribe(val => {
+      forkJoin([this.getMembers(), this.getTasks(), this.getCandidates(), this.getProperties()]).subscribe(val => {
 
         console.log('val')
         console.log(val)
@@ -147,5 +147,14 @@ export class ContentComponent implements OnInit {
       {name:'get_nominates', arguments: [], values: {}}).pipe(tap(value => {
         this.routeParamsService.candidates = value;
       }));
+  }
+
+  getProperties() {
+    return this.agentService.read(this.routeParamsService.server, 
+      this.routeParamsService.agent, 
+      this.routeParamsService.contract, 
+      {name:'get_properties', arguments: [], values: {}}).pipe(tap(value => {
+        this.routeParamsService.instructions = value?.instructions || '';
+    }));
   }
 }

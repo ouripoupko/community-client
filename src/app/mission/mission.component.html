@@ -2,8 +2,9 @@
     <h2 mat-dialog-title>{{ routeParamsService.PartnersProfile[mission.title].name | middleEllipsis }}</h2>
     <div mat-dialog-content>
         <img class="mission-image" [src]="routeParamsService.PartnersProfile[mission.title].imageUrl || 'https://via.placeholder.com/300x300.png?text=NaI'" alt="{{ routeParamsService.PartnersProfile[mission.title].name }}" />
-        <p>Status: {{ mission.status }}</p>
-    <!-- <p>PKey: {{ mission.title }}</p> -->
+        <p>Instractions: {{ routeParamsService.instructions }}</p>
+    <!--    <p>Status: {{ mission.status }}</p>
+     <p>PKey: {{ mission.title }}</p> -->
     <!-- Add any other mission data you want to display -->
     </div>
     <div mat-dialog-actions>
@@ -11,6 +12,6 @@
     <button mat-button color="warn" (click)="closeDialog(false)">Disapprove</button>
     </div>
 </mat-dialog-content>
-<button mat-icon-button (click)="closeDialog(false)" class="close-button">
+<button mat-icon-button (click)="closeDialog(undefined)" class="close-button">
     <mat-icon>close</mat-icon>
 </button>

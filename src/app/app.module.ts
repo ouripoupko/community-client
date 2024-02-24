@@ -18,6 +18,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ContentComponent } from './content/content.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MiddleEllipsisPipe } from './shared/middle-ellipsis.pipe';
+import { InstructionsComponent } from './instructions/instructions.component';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { MiddleEllipsisPipe } from './shared/middle-ellipsis.pipe';
     CandidatesComponent,
     MissionComponent,
     ContentComponent,
-    MiddleEllipsisPipe
+    MiddleEllipsisPipe,
+    InstructionsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,9 @@ import { MiddleEllipsisPipe } from './shared/middle-ellipsis.pipe';
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
