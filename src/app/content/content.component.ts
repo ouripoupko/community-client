@@ -40,38 +40,7 @@ export class ContentComponent implements OnInit {
     this.getPartners().subscribe(_ => {
       forkJoin([this.getMembers(), this.getTasks(), this.getCandidates(), this.getProperties()]).subscribe(val => {
 
-        console.log('val')
-        console.log(val)
-
-        // let members = Object.keys(this.routeParamsService.members);
-        // this.routeParamsService.membersHtml = members.map(m => { return { name: m, imageUrl: `https://via.placeholder.com/300x300.png?text=${m}` } });
-        
-        // for (let i = 0; i < members.length; i++) {
-        //   let agent = (val[3] as Partner[]).find(a => a.agent == members[i]);
-        //   if (agent) {
-        //     this.getProfile(agent.address, agent.agent, agent.profile).subscribe(profile => {
-        //       console.log(profile);
-        //       if (profile)
-        //         this.routeParamsService.membersHtml[i] = { name: `${profile.first_name} ${profile.last_name}`, imageUrl: profile.image_url } 
-        //     });
-        //   }
-        // }
-
-        // this.routeParamsService.candidatesHtml = this.routeParamsService.candidates.map(c => { 
-        //   return { name: c, imageUrl: `https://via.placeholder.com/300x300.png?text=${c}` } 
-        // });
-
-        // for (let i = 0; i < this.routeParamsService.candidates.length; i++) {
-        //   let agent = (val[3] as Partner[]).find(a => a.agent == this.routeParamsService.candidates[i]);
-        //   if (agent) {
-        //     this.getProfile(agent.address, agent.agent, agent.profile).subscribe(profile => {
-        //       console.log(profile);
-        //       if (profile)
-        //         this.routeParamsService.candidatesHtml[i] = { name: `${profile.first_name} ${profile.last_name}`, imageUrl: profile.image_url } 
-        //     });
-        //   }
-        // }
-
+        console.log('val', val);
 
         if (!this.routeParamsService.members.includes(this.routeParamsService.agent) && !this.routeParamsService.candidates.includes(this.routeParamsService.agent)) {
           this.routeParamsService.missionsHtml = [
@@ -102,14 +71,18 @@ export class ContentComponent implements OnInit {
     let partners_method = { name: 'get_partners', values: {}} as Method;
     return this.agentService.read(this.routeParamsService.server, this.routeParamsService.agent, this.routeParamsService.contract, partners_method)
     .pipe(tap(value => {
+      console.log('value of get partners', value);
       this.routeParamsService.partners = value;
       value.forEach((partner: Partner) => {
         this.routeParamsService.PartnersProfile[partner.agent] = { name: partner.agent, imageUrl: `https://via.placeholder.com/300x300.png?text=${partner.agent}` }
-        this.getProfile(partner.address, partner.agent, partner.profile).subscribe(profile => {
-          console.log(profile);
-          if (profile)
-            this.routeParamsService.PartnersProfile[partner.agent] = { name: `${profile.first_name} ${profile.last_name}`, imageUrl: profile.image_url };
-        });
+        console.log('got partner', partner);
+        if (partner.profile) {
+          this.getProfile(partner.address, partner.agent, partner.profile).subscribe(profile => {
+            console.log('read profile', profile);
+            if (profile)
+              this.routeParamsService.PartnersProfile[partner.agent] = { name: `${profile.first_name} ${profile.last_name}`, imageUrl: profile.image_url };
+          });
+        }
       });
     }));
   }
@@ -121,12 +94,11 @@ export class ContentComponent implements OnInit {
   }
 
   getMembers() {
-    // console.log(decodeURIComponent(decodeURIComponent(decodeURIComponent(server))));
-    // console.log((server));
     return this.agentService.read(this.routeParamsService.server, 
       this.routeParamsService.agent, 
       this.routeParamsService.contract, 
       {name:'get_members', arguments: [], values: {}}).pipe(tap(value => {
+        console.log('getMembers value', value);
         this.routeParamsService.members = Object.keys(value);
       }));
   }

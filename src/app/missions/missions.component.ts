@@ -33,7 +33,7 @@ export class MissionsComponent {
 
   JoinCommunity() {
     if (this.routeParamsService.members.length == 0) {
-      this.openInstractions()
+      this.openInstructions()
     }
     else {
       this.agentService.write(this.routeParamsService.server, 
@@ -43,7 +43,7 @@ export class MissionsComponent {
     }
   }
 
-  openInstractions() {
+  openInstructions() {
     const dialogRef = this.dialog.open(InstructionsComponent, {
       width: '90%',
       maxWidth: '600px',

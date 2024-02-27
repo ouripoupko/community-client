@@ -5,5 +5,5 @@
     <img class="friend-icon" [src]="routeParamsService.PartnersProfile[friend].imageUrl || 'https://via.placeholder.com/300x300.png?text=NaI'" alt="{{ routeParamsService.PartnersProfile[friend].name }}" />
     <h3 class="friend-name">{{ routeParamsService.PartnersProfile[friend].name | middleEllipsis }}</h3>
   </div>
-  <h1 *ngIf="!routeParamsService.members.length">no soup for you</h1>
+  <h1 *ngIf="!routeParamsService.members.length">There is no one in this community for now</h1>
 </div>

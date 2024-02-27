@@ -10,7 +10,7 @@ import { FriendsComponent } from './friends/friends.component';
 import { CandidatesComponent } from './candidates/candidates.component';
 import { MissionComponent } from './mission/mission.component';
 
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -21,6 +21,7 @@ import { MiddleEllipsisPipe } from './shared/middle-ellipsis.pipe';
 import { InstructionsComponent } from './instructions/instructions.component';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDialogModule,
     HttpClientModule,
     FormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

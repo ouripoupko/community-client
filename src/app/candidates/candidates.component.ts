@@ -22,11 +22,4 @@ export class CandidatesComponent implements OnInit {
     // });
   }
 
-  cancel() {
-    this.agentService.write(this.routeParamsService.server, 
-      this.routeParamsService.agent, 
-      this.routeParamsService.contract, { name: 'cancel',
-      values: {}} as Method).subscribe();
-  }
-
 }
