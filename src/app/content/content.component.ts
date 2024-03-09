@@ -25,38 +25,36 @@ export class ContentComponent implements OnInit {
       this.routeParamsService.contract = params['contract'];
 
       this.getContractName();
-      this.loadData();
+      this.getPartners().subscribe(_ => {this.loadData();});
       
       this.agentService.listen(this.routeParamsService.server, this.routeParamsService.agent, this.routeParamsService.contract)
         .addEventListener('message', message => {
         if(message.data.length > 0) {
-          this.loadData();
+          let content = JSON.parse(message.data)
+          if (content.action == 'a2a_connect') {
+            this.getPartners().subscribe();
+          } else {
+            if (content.reply === false && content.agent === this.routeParamsService.agent) {
+              this.routeParamsService.logRequestJoin(content.request, content.reply)
+            }
+            this.loadData();
+          }
         }
       });
     });
   }
 
   loadData() {
-    this.getPartners().subscribe(_ => {
-      forkJoin([this.getMembers(), this.getTasks(), this.getCandidates(), this.getProperties()]).subscribe(val => {
+    this.getAll().subscribe(_ => {
 
-        console.log('val', val);
-
-        if (!this.routeParamsService.members.includes(this.routeParamsService.agent) && !this.routeParamsService.candidates.includes(this.routeParamsService.agent)) {
-          this.routeParamsService.missionsHtml = [
-            this.routeParamsService.agent
-            // { title: 'Request to join', status: false, key: this.routeParamsService.agent }
-          ];
-          console.log('default');
-        }
-        else {
-          this.routeParamsService.missionsHtml = Object.keys(this.routeParamsService.missions);
-          // .map( ([key, val]) => {
-          //   return {title: key, status: val};
-          // });
-          console.log(this.routeParamsService.missionsHtml)
-        }
-      })
+      if (!this.routeParamsService.members.includes(this.routeParamsService.agent) && !this.routeParamsService.candidates.includes(this.routeParamsService.agent)) {
+        this.routeParamsService.missionsHtml = [
+          this.routeParamsService.agent
+        ];
+      }
+      else {
+        this.routeParamsService.missionsHtml = Object.keys(this.routeParamsService.missions);
+      }
     })
     this.routeParamsService.data.next(true);
   }
@@ -64,21 +62,17 @@ export class ContentComponent implements OnInit {
   getProfile(server: string, agent: string, profile: string, ) {
     let name_method = { name: 'get_profile', values: {}}as Method;
     return this.agentService.read(server, agent, profile, name_method);
-      // .subscribe(profile => {this.friends[key].name = profile.first_name + ' ' profile.last_name; this.friends[key].imageUrl = profile.image_url});
   }
   
   getPartners() {
     let partners_method = { name: 'get_partners', values: {}} as Method;
     return this.agentService.read(this.routeParamsService.server, this.routeParamsService.agent, this.routeParamsService.contract, partners_method)
     .pipe(tap(value => {
-      console.log('value of get partners', value);
       this.routeParamsService.partners = value;
       value.forEach((partner: Partner) => {
         this.routeParamsService.PartnersProfile[partner.agent] = { name: partner.agent, imageUrl: `https://via.placeholder.com/300x300.png?text=${partner.agent}` }
-        console.log('got partner', partner);
         if (partner.profile) {
           this.getProfile(partner.address, partner.agent, partner.profile).subscribe(profile => {
-            console.log('read profile', profile);
             if (profile)
               this.routeParamsService.PartnersProfile[partner.agent] = { name: `${profile.first_name} ${profile.last_name}`, imageUrl: profile.image_url };
           });
@@ -93,40 +87,16 @@ export class ContentComponent implements OnInit {
     });
   }
 
-  getMembers() {
+  getAll() {
     return this.agentService.read(this.routeParamsService.server, 
       this.routeParamsService.agent, 
       this.routeParamsService.contract, 
-      {name:'get_members', arguments: [], values: {}}).pipe(tap(value => {
-        console.log('getMembers value', value);
-        this.routeParamsService.members = Object.keys(value);
-      }));
-  }
-
-  getTasks() {
-    return this.agentService.read(this.routeParamsService.server, 
-      this.routeParamsService.agent, 
-      this.routeParamsService.contract, 
-      {name:'get_tasks', arguments: [], values: {}}).pipe(tap(value => {
-        this.routeParamsService.missions = value;
-      }));
-  }
-
-  getCandidates() {
-    return this.agentService.read(this.routeParamsService.server, 
-      this.routeParamsService.agent, 
-      this.routeParamsService.contract, 
-      {name:'get_nominates', arguments: [], values: {}}).pipe(tap(value => {
-        this.routeParamsService.candidates = value;
-      }));
-  }
-
-  getProperties() {
-    return this.agentService.read(this.routeParamsService.server, 
-      this.routeParamsService.agent, 
-      this.routeParamsService.contract, 
-      {name:'get_properties', arguments: [], values: {}}).pipe(tap(value => {
-        this.routeParamsService.instructions = value?.instructions || '';
-    }));
+      {name:'get_all', arguments: [], values: {}}).pipe(tap(value => {
+        this.routeParamsService.members = Object.keys(value['members']);
+        this.routeParamsService.missions = value['tasks'];
+        this.routeParamsService.candidates = value['nominates'];
+        this.routeParamsService.instructions = value.properties?.instructions || '';
+      })
+    );
   }
 }

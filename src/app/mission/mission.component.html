@@ -3,7 +3,10 @@
     <div mat-dialog-content>
         <div class="main_content">
             <img class="mission-image" [src]="routeParamsService.PartnersProfile[mission.title].imageUrl || 'https://via.placeholder.com/300x300.png?text=NaI'" alt="{{ routeParamsService.PartnersProfile[mission.title].name }}" />
-            <p>Instructions: {{ routeParamsService.instructions }}</p>
+            <div>
+                <h3>Instructions:</h3>
+                <p>{{ routeParamsService.instructions }}</p>
+            </div>
         </div>
     </div>
     <div mat-dialog-actions>

@@ -26,7 +26,6 @@ export class AgentService {
   write(server: string, identity: string, contract: string, method: Method): Observable<any> {
     const url = `${server}/ibc/app/${identity}/${contract}/${method.name}`;
     let params = new HttpParams().set('action', 'contract_write');
-    console.log(url);
     return this.http.post<any>(url, method, {...this.httpOptions, params: params}).pipe(
       tap(_ => console.log('wrote something')),
       catchError(_ => of(console.error('failed to write something'))),

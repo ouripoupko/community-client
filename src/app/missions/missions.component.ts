@@ -39,7 +39,9 @@ export class MissionsComponent {
       this.agentService.write(this.routeParamsService.server, 
         this.routeParamsService.agent, 
         this.routeParamsService.contract, { name: 'request_join',
-        values: {}} as Method).subscribe();
+        values: {}} as Method).subscribe(reply => {
+          this.routeParamsService.logRequestJoin(reply, null);
+        });
     }
   }
 

@@ -1,0 +1,85 @@
+:host {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+
+  .mdc-dialog__actions {
+    //justify-content: flex-end;
+    margin-top: 20px;
+    padding-left: 24px;
+  }
+  
+  button.mat-button {
+    margin-left: 10px;
+  }
+  
+  button.approve {
+    color: white;
+    background-color: #4CAF50;
+  }
+  
+  button.disapprove {
+    color: white;
+    background-color: #f44336;
+  }
+  
+  @media (max-width: 767px) {
+    .mat-dialog-container {
+      margin: 0;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: none !important;
+    }
+    
+    h2 {
+      font-size: 20px;
+    }
+    
+    p {
+      font-size: 16px;
+    }
+    
+    button.mat-button {
+      font-size: 16px;
+    }
+  }
+
+  .mission-image {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .main_content {
+    display: flex;
+    gap: 20px;
+
+    img {
+      border-radius: 12px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-focus-overlay {
+    opacity: 0.08 !important;
+}
